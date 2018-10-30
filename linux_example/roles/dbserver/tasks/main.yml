@@ -5,15 +5,15 @@
     state: present
   notify: restart postgres service
 
+- name: Initialize the database
+  command: "postgresql-setup initdb"
+  ignore_errors: yes
+
 - name: Start PSQL
   service:
     name: postgresql
     state: started
     enabled: yes
-
-- name: Initialize the database
-  command: "postgresql-setup initdb"
-  ignore_errors: yes
 
 - name: Ensure database is created
   become: true
