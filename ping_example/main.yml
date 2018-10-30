@@ -3,3 +3,5 @@
   gather_facts: no
   tasks:
   - ping:
+    retries: 60
+    delay: 5
