@@ -5,6 +5,7 @@
     description: "{{ item.desc }}"
     rules: "{{ item.rules }}"
     region: "{{ ec2_region }}"
+    vpc_id: "{{ vpc_id }}"
   with_items: "{{ security_groups }}"
 
 - name: Launch instances
