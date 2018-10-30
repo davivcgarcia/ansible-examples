@@ -27,30 +27,35 @@ security_groups:
         from_port: "443"
         to_port: "443"
         cidr_ip: 0.0.0.0/0
-  
-# Instances to launch be launched.
-# If you re-run the playbook after modifying exact_count,
-# instances will be terminated if the actual count > exact_count,
-# or new instances will be launched if actual count < exact_count.
 
+  - name: db
+    desc: the security group for the db server 
+    rules:
+      - proto: tcp
+        from_port: "5432"
+        to_port: "5432"
+        cidr_ip: 0.0.0.0/0
+  
+# instances to launch be launched
 ec2_instances:
   - instance_type: m1.small
     image: "{{ image_id }}"
-    assign_public_ip: true
     keypair: "{{instances_keypair}}"
-    group: ['ssh']
+    assign_public_ip: true
+    group: ['web', 'ssh'] 
     instance_tags: 
-        Name: jumphost
+        Name: web
     exact_count: 1
     count_tag: 
-        Name: jumphost
+        Name: web
 
   - instance_type: m1.small
     image: "{{ image_id }}"
     keypair: "{{instances_keypair}}"
-    group: ['web', 'ssh'] 
+    assign_public_ip: true
+    group: ['db', 'ssh'] 
     instance_tags: 
-        Name: web
+        Name: db
     exact_count: 1 
     count_tag: 
-        Name: web
+        Name: db

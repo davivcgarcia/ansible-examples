@@ -1,5 +1,5 @@
 ---
-- name: Create required security groups
+- name: Create required AWS security groups
   ec2_group:
     name: "{{ item.name }}"
     description: "{{ item.desc }}"
@@ -8,7 +8,7 @@
     vpc_id: "{{ vpc_id }}"
   with_items: "{{ security_groups }}"
 
-- name: Launch instances
+- name: Launch AWS instances
   ec2:
     region: "{{ ec2_region }}"
     vpc_subnet_id: "{{ vpc_subnet_id }}"
@@ -19,6 +19,5 @@
     instance_tags: "{{ item.instance_tags }}"
     exact_count: "{{ item.exact_count }}"
     count_tag: "{{ item.count_tag }}"
-    wait: true
   register: ec2
   with_items: "{{ ec2_instances }}"
