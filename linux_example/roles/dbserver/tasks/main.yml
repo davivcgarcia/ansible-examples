@@ -1,0 +1,28 @@
+---
+- name: Install PSQL packages
+  yum:
+    name: "{{ psql_packages }}"
+    state: present
+  notify: restart postgres service
+
+- name: Start PSQL
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: Initialize the database
+  command: "postgresql-setup initdb"
+  ignore_errors: yes
+
+- name: Ensure database is created
+  postgresql_db: name={{dbname}}
+
+- name: Ensure user has access to database
+  postgresql_user: db={{dbname}} name={{dbuser}} password={{dbpassword}} priv=ALL
+
+- name: Ensure user does not have unnecessary privilege
+  postgresql_user: name={{dbuser}} role_attr_flags=NOSUPERUSER,NOCREATEDB
+
+- name: Ensure no other user can access the database
+  postgresql_privs: db={{dbname}} role=PUBLIC type=database priv=ALL state=absent
