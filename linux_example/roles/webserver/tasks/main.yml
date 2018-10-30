@@ -1,5 +1,4 @@
 ---
-# tasks file for apache-simple
 - name: Install httpd packages
   yum:
     name: "{{ httpd_packages }}"
