@@ -1,6 +1,7 @@
 ---
 # set these parameters to control the region, keypair, and AMI that are launched
 ec2_region: sa-east-1
+vpc_subnet_id: subnet-0611885985817ae55
 instances_keypair: evento
 image_id: ami-b0b7e3dc
 

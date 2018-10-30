@@ -8,8 +8,9 @@
   with_items: "{{ security_groups }}"
 
 - name: Launch instances
-  ec2: 
+  ec2:
     region: "{{ ec2_region }}"
+    vpc_subnet_id: "{{ vpc_subnet_id }}"
     keypair: "{{ item.keypair }}"
     group: "{{ item.group }}"
     instance_type: "{{ item.instance_type }}"
