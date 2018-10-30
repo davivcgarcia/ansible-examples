@@ -19,5 +19,6 @@
     instance_tags: "{{ item.instance_tags }}"
     exact_count: "{{ item.exact_count }}"
     count_tag: "{{ item.count_tag }}"
+    assign_public_ip: "{{ item.assign_public_ip }}"
   register: ec2
   with_items: "{{ ec2_instances }}"
