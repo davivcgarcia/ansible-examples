@@ -44,10 +44,10 @@ ec2_instances:
     assign_public_ip: true
     group: ['web', 'ssh'] 
     instance_tags: 
-        Name: web
+        Name: demo-web
     exact_count: 1
     count_tag: 
-        Name: web
+        Name: demo-web
 
   - instance_type: m1.small
     image: "{{ image_id }}"
@@ -55,7 +55,7 @@ ec2_instances:
     assign_public_ip: true
     group: ['db', 'ssh'] 
     instance_tags: 
-        Name: db
+        Name: demo-db
     exact_count: 1 
     count_tag: 
-        Name: db
+        Name: demo-db
